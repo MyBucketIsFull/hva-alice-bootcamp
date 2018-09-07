@@ -1,42 +1,53 @@
 import { Controller, Post, Get, Put, Delete, Body, Param } from '@nestjs/common';
-import { ApiUseTags, ApiModelProperty, ApiImplicitParam } from '@nestjs/swagger';
+import { ApiUseTags, ApiOperation } from '@nestjs/swagger';
+import { User } from './interfaces/user.interface';
+import { UsersService } from './users.service';
+import { CreateUserDto } from './dto/create-user.dto';
 
-export class User {
-    @ApiModelProperty()
-    readonly name: string;
-
-    @ApiModelProperty()
-    readonly vote: number;
-}
-
-@ApiUseTags('users')
 @Controller('users')
+@ApiUseTags('users')
 export class UsersController {
+    constructor(private readonly usersService: UsersService) {}
+
     @Post()
-    create(@Body() user: User) {
-        return `POST: create - name = ${user.name}, vote = ${user.vote}`;
+    @ApiOperation({ title: 'Create user' })
+    create(@Body() createUserDto: CreateUserDto): User {
+        return this.usersService.create(createUserDto);
     }
 
     @Get()
-    findAll() {
-        return `GET: findAll`;
+    @ApiOperation({ title: 'Get all users' })
+    findAll(): User[] {
+        return this.usersService.findAll();
     }
 
-    @ApiImplicitParam({ name: 'id', type: 'Number' })
     @Get(':id')
-    findOne(@Param() params) {
-        return `GET: findOne - id = ${params.id}`;
+    @ApiOperation({ title: 'Get user' })
+    findOne(@Param('id') id: number): any {
+        var user = this.usersService.findOne(+id);
+        if (user == null) {
+            return 'not found';
+        }
+        return user;
     }
 
-    @ApiImplicitParam({ name: 'id', type: 'Number' })
     @Put(':id')
-        update(@Param('id') id, @Body() user: User) {
-        return `PUT: update - id = ${id}, name = ${user.name}, vote = ${user.vote}`;
+    @ApiOperation({ title: 'Update user' })
+    update(@Body() createUserDto: CreateUserDto, @Param('id') id: number): any {
+        var user = this.usersService.update(+id, createUserDto);
+        if (user == null) {
+            return 'not found';
+        }
+        return user;
     }
 
-    @ApiImplicitParam({ name: 'id', type: 'Number' })
     @Delete(':id')
-        remove(@Param('id') id) {
-        return `DELETE: remove - id = ${id}`;
+    @ApiOperation({ title: 'Delete user' })
+    async remove(@Param('id') id: number): Promise<String> {
+        var success = this.usersService.remove(+id);
+        if (!success) {
+            return 'not found';
+        }
+        return 'success';
     }
 }
