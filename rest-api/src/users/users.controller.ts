@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Put, Delete, Body, Param } from '@nestjs/common';
+import { Controller, Post, Get, Put, Delete, Body, Param, Patch } from '@nestjs/common';
 import { ApiUseTags, ApiOperation } from '@nestjs/swagger';
 import { User } from './interfaces/user.interface';
 import { UsersService } from './users.service';
@@ -49,5 +49,15 @@ export class UsersController {
             return 'not found';
         }
         return 'success';
+    }
+
+    @Patch(':id/vote')
+    @ApiOperation({ title: 'Add one vote to the user' })
+    vote(@Param('id') id: number): any {
+        var user = this.usersService.vote(+id);
+        if (user == null) {
+            return 'not found';
+        }
+        return user;
     }
 }

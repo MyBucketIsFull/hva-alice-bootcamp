@@ -10,7 +10,7 @@ export class UsersService {
       var user = {
         id: this.users.length + 1,
         name: createUserDto.name,
-        vote: createUserDto.vote
+        vote: 0,
       } as User;
       this.users.push(user);
       return user;
@@ -29,12 +29,11 @@ export class UsersService {
       var currentUser = this.users[index];
       if (currentUser == null) {
         return null;
-      }
-      
+      }      
       var newUser = {
         id: currentUser.id,
         name: createUserDto.name,
-        vote: createUserDto.vote
+        vote: currentUser.vote,
       } as User;
       this.users[index] = newUser;
       return newUser;
@@ -48,5 +47,14 @@ export class UsersService {
       }
       delete this.users[index];
       return true;
+    }
+
+    vote(id: number): User {
+      var user = this.users[id - 1];
+      if (user == null) {
+        return null;
+      }
+      user.vote += 1;
+      return user;
     }
 }
