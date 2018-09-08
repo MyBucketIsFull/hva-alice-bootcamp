@@ -1,60 +1,57 @@
-import { Injectable } from '@nestjs/common';
-import { User } from './interfaces/user.interface';
-import { CreateUserDto } from './dto/create-user.dto';
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import { CreateUserDto } from "./dto/create-user.dto";
+import { UpdateUserDto } from "./dto/update-user.dto";
+import { User } from "./user.entity";
 
 @Injectable()
 export class UsersService {
-    private readonly users: User[] = [];
+  constructor(@InjectRepository(User) private readonly userRepository: Repository<User>) {}
   
-    create(createUserDto: CreateUserDto): User {
-      var user = {
-        id: this.users.length + 1,
-        name: createUserDto.name,
-        vote: 0,
-      } as User;
-      this.users.push(user);
-      return user;
-    }
-  
-    findAll(): User[] {
-      return this.users.filter((obj) => obj);
+  async create(ceateUserDto: CreateUserDto): Promise<User> {
+    const user = new User();
+    user.name = ceateUserDto.name;
+    user.vote = 0;
+    return await this.userRepository.save(user);
+  }
+
+  async findAll(): Promise<User[]> {
+    return await this.userRepository.find();
+  }
+
+  async findOne(id: number): Promise<User> {
+    return await this.userRepository.findOne(id);
+  }
+
+  async update(id: number, updateUserDto: UpdateUserDto): Promise<User> {
+    const user = await this.findOne(id);
+    if (user == null) {
+      return null;
     }
 
-    findOne(id: number): User {
-      return this.users[id - 1];
+    user.name = updateUserDto.name;
+    return await this.userRepository.save(user);
+  }
+
+  async remove(id: number): Promise<boolean> {
+    const user = await this.findOne(id);
+    if (user == null) {
+      return false;
     }
 
-    update(id: number, createUserDto: CreateUserDto): User {
-      var index = id - 1;
-      var currentUser = this.users[index];
-      if (currentUser == null) {
-        return null;
-      }      
-      var newUser = {
-        id: currentUser.id,
-        name: createUserDto.name,
-        vote: currentUser.vote,
-      } as User;
-      this.users[index] = newUser;
-      return newUser;
-    }
+    await this.userRepository.delete(id);
+    return true;
+  }
 
-    remove(id: number): boolean {
-      var index = id - 1;
-      var user = this.users[index];
-      if (user == null) {
-        return false;
-      }
-      delete this.users[index];
-      return true;
+  async vote(id: number): Promise<User> {
+    const user = await this.findOne(id);
+    if (user == null) {
+      return null;
     }
-
-    vote(id: number): User {
-      var user = this.users[id - 1];
-      if (user == null) {
-        return null;
-      }
-      user.vote += 1;
-      return user;
-    }
+    
+    user.vote += 1;
+    await this.userRepository.update(id, user);
+    return user;
+  }
 }

@@ -1,8 +1,9 @@
-import { Controller, Post, Get, Put, Delete, Body, Param, Patch } from '@nestjs/common';
-import { ApiUseTags, ApiOperation } from '@nestjs/swagger';
-import { User } from './interfaces/user.interface';
-import { UsersService } from './users.service';
-import { CreateUserDto } from './dto/create-user.dto';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Put } from "@nestjs/common";
+import { ApiOperation, ApiUseTags } from "@nestjs/swagger";
+import { CreateUserDto } from "./dto/create-user.dto";
+import { UpdateUserDto } from "./dto/update-user.dto";
+import { User } from "./user.entity";
+import { UsersService } from "./users.service";
 
 @Controller('users')
 @ApiUseTags('users')
@@ -11,40 +12,34 @@ export class UsersController {
 
     @Post()
     @ApiOperation({ title: 'Create user' })
-    create(@Body() createUserDto: CreateUserDto): User {
-        return this.usersService.create(createUserDto);
+    async create(@Body() createUserDto: CreateUserDto): Promise<User> {
+        return await this.usersService.create(createUserDto);
     }
 
     @Get()
     @ApiOperation({ title: 'Get all users' })
-    findAll(): User[] {
-        return this.usersService.findAll();
+    async findAll(): Promise<User[]> {
+        return await this.usersService.findAll();
     }
 
     @Get(':id')
     @ApiOperation({ title: 'Get user' })
-    findOne(@Param('id') id: number): any {
-        var user = this.usersService.findOne(+id);
-        if (user == null) {
-            return 'not found';
-        }
-        return user;
+    async findOne(@Param('id') id: number): Promise<any> {
+        const user = await this.usersService.findOne(+id);
+        return this.checkNull(user);
     }
 
     @Put(':id')
     @ApiOperation({ title: 'Update user' })
-    update(@Body() createUserDto: CreateUserDto, @Param('id') id: number): any {
-        var user = this.usersService.update(+id, createUserDto);
-        if (user == null) {
-            return 'not found';
-        }
-        return user;
+    async update(@Body() updateUserDto: UpdateUserDto, @Param('id') id: number): Promise<any> {
+        const user = await this.usersService.update(+id, updateUserDto);
+        return this.checkNull(user);
     }
 
     @Delete(':id')
     @ApiOperation({ title: 'Delete user' })
     async remove(@Param('id') id: number): Promise<String> {
-        var success = this.usersService.remove(+id);
+        const success = await this.usersService.remove(+id);
         if (!success) {
             return 'not found';
         }
@@ -53,8 +48,12 @@ export class UsersController {
 
     @Patch(':id/vote')
     @ApiOperation({ title: 'Add one vote to the user' })
-    vote(@Param('id') id: number): any {
-        var user = this.usersService.vote(+id);
+    async vote(@Param('id') id: number): Promise<any> {
+        const user = await this.usersService.vote(+id);
+        return this.checkNull(user);
+    }
+
+    checkNull(user: User): any {
         if (user == null) {
             return 'not found';
         }
