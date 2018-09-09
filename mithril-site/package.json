@@ -7,7 +7,7 @@
     "start": "webpack src/ts/index.ts  -d --watch & http-server -p 8080",
     "test": "./node_modules/tslint/bin/tslint -c ./.tslint.ts ./src/ts/*.ts ./src/ts/models/*.ts ./src/ts/views/*.ts"
   },
-  "author": "Amsterdam University of Applied Sciences",
+  "author": "Bram",
   "license": "GPL3",
   "dependencies": {
     "bootstrap": "^4.1.3",

@@ -1,12 +1,12 @@
 import m from 'mithril';
 
-export class User { 
+export class Message { 
     public list = [];
 
     constructor() {
         m.request({
             method: "GET",
-            url: "http://localhost:3000/users",
+            url: "http://localhost:3000/messages",
         })
         .then((result: any) => {
            this.list = result;
