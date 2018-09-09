@@ -40,23 +40,21 @@ export class UsersController {
     @ApiOperation({ title: 'Delete user' })
     async remove(@Param('id') id: number): Promise<String> {
         const success = await this.usersService.remove(+id);
-        if (!success) {
-            return 'not found';
-        }
-        return 'success';
+        return this.checkSuccess(success);
     }
 
-    @Patch(':id/vote')
-    @ApiOperation({ title: 'Add one vote to the user' })
+    @Patch(':id/like')
+    @ApiOperation({ title: 'Add one like to the user' })
     async vote(@Param('id') id: number): Promise<any> {
-        const user = await this.usersService.vote(+id);
+        const user = await this.usersService.like(+id);
         return this.checkNull(user);
     }
 
     checkNull(user: User): any {
-        if (user == null) {
-            return 'not found';
-        }
-        return user;
+        return user == null ? 'not found' : user;
+    }
+
+    checkSuccess(success: boolean): String {
+        return success ? 'success' : 'not found';
     }
 }

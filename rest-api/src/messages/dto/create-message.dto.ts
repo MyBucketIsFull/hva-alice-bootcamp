@@ -1,5 +1,5 @@
-import { IsString, IsInt } from 'class-validator';
 import { ApiModelProperty } from '@nestjs/swagger';
+import { IsInt, IsString } from 'class-validator';
 
 export class CreateMessageDto {
     @ApiModelProperty()
@@ -7,6 +7,6 @@ export class CreateMessageDto {
     readonly text: string;
 
     @ApiModelProperty()
-    @IsString()
+    @IsInt()
     readonly user_id: number;
 }

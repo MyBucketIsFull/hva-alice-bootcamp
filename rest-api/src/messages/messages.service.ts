@@ -1,63 +1,72 @@
-import { Injectable } from '@nestjs/common';
-import { Message } from './interfaces/message.interface';
-import { CreateMessageDto } from './dto/create-message.dto';
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { getRepository, Repository } from "typeorm";
+import { CreateMessageDto } from "./dto/create-message.dto";
+import { UpdateMessageDto } from "./dto/update-message.dto";
+import { VoteMessageDto } from "./dto/vote-message.dto";
+import { Message } from "./message.entity";
+import { User } from "../users/user.entity";
 
 @Injectable()
 export class MessagesService {
-    private readonly messages: Message[] = [];
+  constructor(
+    @InjectRepository(Message) private readonly messageRepository: Repository<Message>) {}
   
-    create(createMessageDto: CreateMessageDto): Message {
-      var message = {
-        id: this.messages.length + 1,
-        text: createMessageDto.text,
-        vote: 0,
-        user_id: createMessageDto.user_id,
-      } as Message;
-      this.messages.push(message);
-      return message;
-    }
-  
-    findAll(): Message[] {
-      return this.messages.filter((obj) => obj);
+  async create(createMessageDto: CreateMessageDto): Promise<Message> {
+    const user = await getRepository(User).findOne(createMessageDto.user_id);
+    if (user == null) {
+      return null;
     }
 
-    findOne(id: number): Message {
-      return this.messages[id - 1];
+    const message = new Message();
+    message.text = createMessageDto.text;
+    message.user = user;
+    const newUser = await this.messageRepository.save(message);
+    return await this.findOne(newUser.id);
+  }
+
+  async findAll(): Promise<Message[]> {
+    return await this.messageRepository.find({ relations: ['user', 'votes'] });
+  }
+
+  async findOne(id: number): Promise<Message> {
+    return await this.messageRepository.findOne(id, { relations: ['user', 'votes'] });
+  }
+
+  async update(id: number, updateMessageDto: UpdateMessageDto): Promise<Message> {
+    const message = await this.findOne(id);
+    if (message == null) {
+      return null;
     }
 
-    update(id: number, createMessageDto: CreateMessageDto): Message {
-      var index = id - 1;
-      var currentMessage = this.messages[index];
-      if (currentMessage == null) {
-        return null;
-      }
-      
-      var newMessage = {
-        id: currentMessage.id,
-        text: createMessageDto.text,
-        vote: currentMessage.vote,
-        user_id: createMessageDto.user_id,
-      } as Message;
-      this.messages[index] = newMessage;
-      return newMessage;
+    message.text = updateMessageDto.text;
+    await this.messageRepository.save(message);
+    return await this.findOne(id);
+  }
+
+  async remove(id: number): Promise<boolean> {
+    const message = await this.findOne(id);
+    if (message == null) {
+      return false;
     }
 
-    remove(id: number): boolean {
-      var index = id - 1;
-      var message = this.messages[index];
-      if (message == null) {
-        return false;
-      }
-      delete this.messages[index];
-      return true;
-    }
+    await this.messageRepository.remove(message);
+    return true;
+  }
 
-    vote(id: number): Message {
-      var message = this.messages[id - 1];
-      if (message == null) {
-        return null;
-      }
-      message.vote += 1;
-      return message;
+  async vote(id: number, voteMessageDto: VoteMessageDto): Promise<Message> {
+    const message = await this.findOne(id);
+    if (message == null) {
+      return null;
     }
+    
+    const user = await getRepository(User).findOne(voteMessageDto.user_id);
+    if (user == null) {
+      return null;
+    }
+    
+    message.votes.push(user);
+    await this.messageRepository.save(message);
+    return await this.findOne(id);
+  }
 }

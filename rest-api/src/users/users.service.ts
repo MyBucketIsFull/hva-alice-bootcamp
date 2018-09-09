@@ -9,10 +9,10 @@ import { User } from "./user.entity";
 export class UsersService {
   constructor(@InjectRepository(User) private readonly userRepository: Repository<User>) {}
   
-  async create(ceateUserDto: CreateUserDto): Promise<User> {
+  async create(createUserDto: CreateUserDto): Promise<User> {
     const user = new User();
-    user.name = ceateUserDto.name;
-    user.vote = 0;
+    user.name = createUserDto.name;
+    user.like = 0;
     return await this.userRepository.save(user);
   }
 
@@ -40,18 +40,17 @@ export class UsersService {
       return false;
     }
 
-    await this.userRepository.delete(id);
+    await this.userRepository.remove(user);
     return true;
   }
 
-  async vote(id: number): Promise<User> {
+  async like(id: number): Promise<User> {
     const user = await this.findOne(id);
     if (user == null) {
       return null;
     }
     
-    user.vote += 1;
-    await this.userRepository.update(id, user);
-    return user;
+    user.like += 1;
+    return await this.userRepository.save(user);
   }
 }

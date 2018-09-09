@@ -9,8 +9,8 @@ import { UsersModule } from "../users/users.module";
 @Module({
   imports: [
     TypeOrmModule.forRoot(),
-    MessagesModule,
     UsersModule,
+    MessagesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

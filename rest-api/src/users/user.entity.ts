@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Message } from '../messages/message.entity';
 
 @Entity()
 export class User {
@@ -9,5 +10,8 @@ export class User {
   name: string;
 
   @Column()
-  vote: number;
+  like: number;
+
+  @ManyToMany(type => Message, message => message.votes)
+  voted: Message[];
 }

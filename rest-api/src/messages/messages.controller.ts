@@ -1,8 +1,10 @@
-import { Controller, Post, Get, Put, Delete, Body, Param, Patch } from '@nestjs/common';
-import { ApiUseTags, ApiOperation } from '@nestjs/swagger';
-import { Message } from './interfaces/message.interface';
-import { MessagesService } from './messages.service';
-import { CreateMessageDto } from './dto/create-message.dto';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Put } from "@nestjs/common";
+import { ApiOperation, ApiUseTags } from "@nestjs/swagger";
+import { CreateMessageDto } from "./dto/create-message.dto";
+import { UpdateMessageDto } from "./dto/update-message.dto";
+import { VoteMessageDto } from "./dto/vote-message.dto";
+import { Message } from "./message.entity";
+import { MessagesService } from "./messages.service";
 
 @Controller('messages')
 @ApiUseTags('messages')
@@ -11,53 +13,50 @@ export class MessagesController {
 
     @Post()
     @ApiOperation({ title: 'Create message' })
-    create(@Body() createMessageDto: CreateMessageDto): Message {
-        return this.messagesService.create(createMessageDto);
+    async create(@Body() createMessageDto: CreateMessageDto): Promise<Message> {
+        const message = await this.messagesService.create(createMessageDto);
+        return this.checkNull(message);
     }
 
     @Get()
     @ApiOperation({ title: 'Get all messages' })
-    findAll(): Message[] {
-        return this.messagesService.findAll();
+    async findAll(): Promise<Message[]> {
+        return await this.messagesService.findAll();
     }
 
     @Get(':id')
     @ApiOperation({ title: 'Get message' })
-    findOne(@Param('id') id: number): any {
-        var message = this.messagesService.findOne(+id);
-        if (message == null) {
-            return 'not found';
-        }
-        return message;
+    async findOne(@Param('id') id: number): Promise<any> {
+        const message = await this.messagesService.findOne(+id);
+        return this.checkNull(message);
     }
 
     @Put(':id')
     @ApiOperation({ title: 'Update message' })
-    update(@Body() createMessageDto: CreateMessageDto, @Param('id') id: number): any {
-        var message = this.messagesService.update(+id, createMessageDto);
-        if (message == null) {
-            return 'not found';
-        }
-        return message;
+    async update(@Body() updateMessageDto: UpdateMessageDto, @Param('id') id: number): Promise<any> {
+        const message = await this.messagesService.update(+id, updateMessageDto);
+        return this.checkNull(message);
     }
 
     @Delete(':id')
     @ApiOperation({ title: 'Delete message' })
     async remove(@Param('id') id: number): Promise<String> {
-        var success = this.messagesService.remove(+id);
-        if (!success) {
-            return 'not found';
-        }
-        return 'success';
+        const success = await this.messagesService.remove(+id);
+        return this.checkSuccess(success);
     }
 
     @Patch(':id/vote')
     @ApiOperation({ title: 'Add one vote to the message' })
-    vote(@Param('id') id: number): any {
-        var message = this.messagesService.vote(+id);
-        if (message == null) {
-            return 'not found';
-        }
-        return message;
+    async vote(@Body() voteMessageDto: VoteMessageDto, @Param('id') id: number): Promise<any> {
+        const message = await this.messagesService.vote(+id, voteMessageDto);
+        return this.checkNull(message);
+    }
+
+    checkNull(message: Message): any {
+        return message == null ? 'not found' : message;
+    }
+
+    checkSuccess(success: boolean): String {
+        return success ? 'success' : 'not found';
     }
 }
