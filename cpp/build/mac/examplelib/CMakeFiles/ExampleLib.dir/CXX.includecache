@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../../examplelib/include/Foo.h
+string
+-
+
+/Users/bramtukker/VirtualBox VMs/CentOs/Shared/hva-cpp-bootcamp/examplelib/src/Foo.cxx
+Foo.h
+/Users/bramtukker/VirtualBox VMs/CentOs/Shared/hva-cpp-bootcamp/examplelib/src/Foo.h
+

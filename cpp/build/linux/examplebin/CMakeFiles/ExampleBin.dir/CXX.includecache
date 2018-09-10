@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../../examplelib/include/Foo.h
+string
+-
+
+/media/sf_Shared/hva-cpp-bootcamp/examplebin/src/Main.cxx
+iostream
+-
+Foo.h
+/media/sf_Shared/hva-cpp-bootcamp/examplebin/src/Foo.h
+

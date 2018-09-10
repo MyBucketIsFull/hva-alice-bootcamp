@@ -1,0 +1,15 @@
+/Users/bramtukker/VirtualBox VMs/CentOs/Shared/hva-cpp-bootcamp/build/mac/CMakeFiles/rebuild_cache.dir
+/Users/bramtukker/VirtualBox VMs/CentOs/Shared/hva-cpp-bootcamp/build/mac/CMakeFiles/edit_cache.dir
+/Users/bramtukker/VirtualBox VMs/CentOs/Shared/hva-cpp-bootcamp/build/mac/CMakeFiles/test.dir
+/Users/bramtukker/VirtualBox VMs/CentOs/Shared/hva-cpp-bootcamp/build/mac/examplelib/CMakeFiles/rebuild_cache.dir
+/Users/bramtukker/VirtualBox VMs/CentOs/Shared/hva-cpp-bootcamp/build/mac/examplelib/CMakeFiles/edit_cache.dir
+/Users/bramtukker/VirtualBox VMs/CentOs/Shared/hva-cpp-bootcamp/build/mac/examplelib/CMakeFiles/test.dir
+/Users/bramtukker/VirtualBox VMs/CentOs/Shared/hva-cpp-bootcamp/build/mac/examplelib/CMakeFiles/ExampleLib.dir
+/Users/bramtukker/VirtualBox VMs/CentOs/Shared/hva-cpp-bootcamp/build/mac/examplebin/CMakeFiles/rebuild_cache.dir
+/Users/bramtukker/VirtualBox VMs/CentOs/Shared/hva-cpp-bootcamp/build/mac/examplebin/CMakeFiles/edit_cache.dir
+/Users/bramtukker/VirtualBox VMs/CentOs/Shared/hva-cpp-bootcamp/build/mac/examplebin/CMakeFiles/test.dir
+/Users/bramtukker/VirtualBox VMs/CentOs/Shared/hva-cpp-bootcamp/build/mac/examplebin/CMakeFiles/ExampleBin.dir
+/Users/bramtukker/VirtualBox VMs/CentOs/Shared/hva-cpp-bootcamp/build/mac/tests/CMakeFiles/rebuild_cache.dir
+/Users/bramtukker/VirtualBox VMs/CentOs/Shared/hva-cpp-bootcamp/build/mac/tests/CMakeFiles/edit_cache.dir
+/Users/bramtukker/VirtualBox VMs/CentOs/Shared/hva-cpp-bootcamp/build/mac/tests/CMakeFiles/test.dir
+/Users/bramtukker/VirtualBox VMs/CentOs/Shared/hva-cpp-bootcamp/build/mac/tests/CMakeFiles/Tests.dir

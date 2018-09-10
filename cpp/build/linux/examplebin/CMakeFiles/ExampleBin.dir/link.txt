@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/ExampleBin.dir/src/Main.cxx.o  -o ExampleBin -rdynamic ../examplelib/libExampleLib.so -Wl,-rpath,/media/sf_Shared/hva-cpp-bootcamp/build/linux/examplelib 
