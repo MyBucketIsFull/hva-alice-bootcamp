@@ -11,6 +11,8 @@ string
 -
 
 /Users/bramtukker/VirtualBox VMs/CentOs/Shared/hva-cpp-bootcamp/examplebin/src/Main.cxx
+curl/curl.h
+-
 iostream
 -
 Foo.h

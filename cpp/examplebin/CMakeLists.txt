@@ -11,3 +11,4 @@ include_directories(${CMAKE_SOURCE_DIR}/examplelib/include )
 add_executable(ExampleBin ${EXAMPLE_BIN_SRC})
 
 target_link_libraries(ExampleBin ExampleLib)
+target_link_libraries(ExampleBin curl)
