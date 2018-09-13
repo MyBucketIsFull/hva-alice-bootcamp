@@ -1,3 +1,0 @@
-/media/sf_Shared/hva-cpp-bootcamp/build/linux/examplebin/CMakeFiles/ExampleBin.dir
-/media/sf_Shared/hva-cpp-bootcamp/build/linux/examplelib/CMakeFiles/ExampleLib.dir
-/media/sf_Shared/hva-cpp-bootcamp/build/linux/tests/CMakeFiles/Tests.dir

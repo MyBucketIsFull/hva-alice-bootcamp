@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "*.h": "objective-c",
         "cctype": "cpp",
         "cmath": "cpp",
         "csignal": "cpp",
@@ -40,6 +41,9 @@
         "tuple": "cpp",
         "typeindex": "cpp",
         "typeinfo": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "__config": "cpp",
+        "__nullptr": "cpp",
+        "algorithm": "cpp"
     }
 }

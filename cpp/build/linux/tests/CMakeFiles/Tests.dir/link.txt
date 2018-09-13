@@ -1,1 +1,0 @@
-/usr/bin/c++       CMakeFiles/Tests.dir/TestLib.cxx.o  -o Tests -rdynamic ../examplelib/libExampleLib.so -lboost_unit_test_framework-mt -Wl,-rpath,/media/sf_Shared/hva-cpp-bootcamp/build/linux/examplelib 
