@@ -1,2 +1,2 @@
 #!/bin/sh
-./../tslint/bin/tslint -c tslint.json 'src/**/*.ts'
+./../node_modules/tslint/bin/tslint -c tslint.json 'src/**/*.ts'
