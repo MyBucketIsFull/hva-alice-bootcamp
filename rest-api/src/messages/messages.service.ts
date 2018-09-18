@@ -1,17 +1,17 @@
-import { Injectable } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { getRepository, Repository } from "typeorm";
-import { CreateMessageDto } from "./dto/create-message.dto";
-import { UpdateMessageDto } from "./dto/update-message.dto";
-import { VoteMessageDto } from "./dto/vote-message.dto";
-import { Message } from "./message.entity";
-import { User } from "../users/user.entity";
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { getRepository, Repository } from 'typeorm';
+import { CreateMessageDto } from './dto/create-message.dto';
+import { UpdateMessageDto } from './dto/update-message.dto';
+import { VoteMessageDto } from './dto/vote-message.dto';
+import { Message } from './message.entity';
+import { User } from '../users/user.entity';
 
 @Injectable()
 export class MessagesService {
   constructor(
-    @InjectRepository(Message) private readonly messageRepository: Repository<Message>) {}
-  
+  @InjectRepository(Message) private readonly messageRepository: Repository<Message>) {}
+
   async create(createMessageDto: CreateMessageDto): Promise<Message> {
     const user = await getRepository(User).findOne(createMessageDto.user_id);
     if (user == null) {
@@ -59,12 +59,12 @@ export class MessagesService {
     if (message == null) {
       return null;
     }
-    
+
     const user = await getRepository(User).findOne(voteMessageDto.user_id);
     if (user == null) {
       return null;
     }
-    
+
     message.votes.push(user);
     await this.messageRepository.save(message);
     return await this.findOne(id);
