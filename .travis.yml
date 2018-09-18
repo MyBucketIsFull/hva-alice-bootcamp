@@ -1,6 +1,7 @@
+before_script: cd rest-api
+
 language: node_js
 node_js:
-  - "iojs"
   - "7"
 
 notifications:
