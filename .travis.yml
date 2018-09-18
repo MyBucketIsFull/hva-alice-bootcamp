@@ -4,9 +4,7 @@ language: node_js
 node_js:
   - "7"
 
-script:
-  - chmod +x build.sh
-  - ./build.sh
+script: ./build.sh
 
 notifications:
 on_success: always
