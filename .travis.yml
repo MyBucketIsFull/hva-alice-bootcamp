@@ -4,6 +4,8 @@ language: node_js
 node_js:
   - "7"
 
+script: build.sh
+
 notifications:
 on_success: always
 on_failure: always
