@@ -1,10 +1,10 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Put } from "@nestjs/common";
-import { ApiOperation, ApiUseTags } from "@nestjs/swagger";
-import { CreateMessageDto } from "./dto/create-message.dto";
-import { UpdateMessageDto } from "./dto/update-message.dto";
-import { VoteMessageDto } from "./dto/vote-message.dto";
-import { Message } from "./message.entity";
-import { MessagesService } from "./messages.service";
+import { Body, Controller, Delete, Get, Param, Patch, Post, Put } from '@nestjs/common';
+import { ApiOperation, ApiUseTags } from '@nestjs/swagger';
+import { CreateMessageDto } from './dto/create-message.dto';
+import { UpdateMessageDto } from './dto/update-message.dto';
+import { VoteMessageDto } from './dto/vote-message.dto';
+import { Message } from './message.entity';
+import { MessagesService } from './messages.service';
 
 @Controller('messages')
 @ApiUseTags('messages')
@@ -40,7 +40,7 @@ export class MessagesController {
 
     @Delete(':id')
     @ApiOperation({ title: 'Delete message' })
-    async remove(@Param('id') id: number): Promise<String> {
+    async remove(@Param('id') id: number): Promise<string> {
         const success = await this.messagesService.remove(+id);
         return this.checkSuccess(success);
     }
@@ -56,7 +56,7 @@ export class MessagesController {
         return message == null ? 'not found' : message;
     }
 
-    checkSuccess(success: boolean): String {
+    checkSuccess(success: boolean): string {
         return success ? 'success' : 'not found';
     }
 }

@@ -1,9 +1,9 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Put } from "@nestjs/common";
-import { ApiOperation, ApiUseTags } from "@nestjs/swagger";
-import { CreateUserDto } from "./dto/create-user.dto";
-import { UpdateUserDto } from "./dto/update-user.dto";
-import { User } from "./user.entity";
-import { UsersService } from "./users.service";
+import { Body, Controller, Delete, Get, Param, Patch, Post, Put } from '@nestjs/common';
+import { ApiOperation, ApiUseTags } from '@nestjs/swagger';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { User } from './user.entity';
+import { UsersService } from './users.service';
 
 @Controller('users')
 @ApiUseTags('users')
@@ -38,7 +38,7 @@ export class UsersController {
 
     @Delete(':id')
     @ApiOperation({ title: 'Delete user' })
-    async remove(@Param('id') id: number): Promise<String> {
+    async remove(@Param('id') id: number): Promise<string> {
         const success = await this.usersService.remove(+id);
         return this.checkSuccess(success);
     }
@@ -54,7 +54,7 @@ export class UsersController {
         return user == null ? 'not found' : user;
     }
 
-    checkSuccess(success: boolean): String {
+    checkSuccess(success: boolean): string {
         return success ? 'success' : 'not found';
     }
 }
