@@ -12,9 +12,10 @@ before_install:
 before_script:
   - cd zookeeper-3.4.12/conf
   - sudo touch zoo.cfg
-  - sudo echo "tickTime=2000" >> zoo.cfg
-  - sudo echo "dataDir=/var/zookeeper" >> zoo.cfg
-  - sudo echo "clientPort=2181" >> zoo.cfg
+  - sudo chmod 777 zoo.cfg
+  - echo "tickTime=2000" >> zoo.cfg
+  - echo "dataDir=/var/zookeeper" >> zoo.cfg
+  - echo "clientPort=2181" >> zoo.cfg
   - cd ..
   - sudo bin/zkServer.sh start
   - cd $TRAVIS_BUILD_DIR/cpp
