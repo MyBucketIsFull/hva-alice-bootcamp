@@ -2,34 +2,16 @@ language: cpp
 
 compiler:
   - gcc
-  - clang
-
-before_install:
-  - sudo wget http://apache.hippo.nl/zookeeper/current/zookeeper-3.4.12.tar.gz
-  - sudo tar -xvf zookeeper-3.4.12.tar.gz
 
 before_script:
-  - cd zookeeper-3.4.12/conf
-  - sudo touch zoo.cfg
-  - sudo chmod 777 zoo.cfg
-  - echo "tickTime=2000" >> zoo.cfg
-  - echo "dataDir=/var/zookeeper" >> zoo.cfg
-  - echo "clientPort=2181" >> zoo.cfg
-  - cd ..
-  - sudo bin/zkServer.sh start
-  - cd ../cpp
+  - cd cpp
   - mkdir build
   - cd build
   - cmake ..
-  - make
+  - make testFoo
 
 script:
-  - ./bin/main
   - ./tests/testFoo
-
-after_script:
-  - cd ../../zookeeper-3.4.12
-  - sudo bin/zkServer.sh stop
 
 notifications:
 on_success: always
