@@ -5,12 +5,12 @@ compiler:
 
 before_install:
   - cd /opt
-  - sudo wget http://apache.is.co.za/zookeeper/zookeeper-3.4.9/zookeeper-3.4.9.tar.gz
-  - sudo tar -xvf zookeeper-3.4.9.tar.gz
+  - sudo wget http://apache.hippo.nl/zookeeper/current/zookeeper-3.4.12.tar.gz
+  - sudo tar -xvf zookeeper-3.4.12.tar.gz
 
 before_script:
   - ls
-  - cd zookeeper-3.4.9
+  - cd zookeeper-3.4.12
   - sudo bin/zkServer.sh start
   - cd $TRAVIS_BUILD_DIR/cpp
   - mkdir build
@@ -23,7 +23,7 @@ script:
   - ./tests/testFoo
 
 after_script:
-  - cd /opt/zookeeper-3.4.9
+  - cd /opt/zookeeper-3.4.12
   - sudo bin/zkServer.sh stop
 
 notifications:
