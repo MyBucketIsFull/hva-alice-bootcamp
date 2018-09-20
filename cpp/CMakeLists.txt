@@ -24,7 +24,5 @@ if(ENABLE_TESTS)
     add_subdirectory(tests)
 endif()
 
-include_directories(${ZOOKEEPER_INCLUDE_DIR}/zookeeper)
-
 add_subdirectory(lib)
 add_subdirectory(bin)
