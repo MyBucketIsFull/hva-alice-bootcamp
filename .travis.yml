@@ -11,7 +11,7 @@ before_install:
 
 before_script:
   - cd zookeeper-3.4.12/conf
-  - touch zoo.cfg
+  - sudo touch zoo.cfg
   - echo "tickTime=2000" >> zoo.cfg
   - echo "dataDir=/var/zookeeper" >> zoo.cfg
   - echo "clientPort=2181" >> zoo.cfg
