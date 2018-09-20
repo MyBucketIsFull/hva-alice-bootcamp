@@ -1,0 +1,20 @@
+language: cpp
+
+compiler:
+  - gcc
+  - clang
+
+before-script:
+  - cd cpp
+  - mkdir build
+  - cd build
+  - cmake ..
+  - make
+
+script:
+  - ./bin/main
+  - ./tests/testFoo
+
+notifications:
+on_success: always
+on_failure: always
