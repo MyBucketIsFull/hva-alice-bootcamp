@@ -4,18 +4,15 @@ compiler:
   - gcc
 
 before_install:
-  - sudo rm -rf /etc/apt/sources.list.d/rwky-redis.list
-  - sudo add-apt-repository ppa:chris-lea/redis-server -y
-  - curl -s http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh/archive.key | sudo apt-key add -
-  - wget http://archive.cloudera.com/cdh4/one-click-install/precise/amd64/cdh4-repository_1.0_all.deb
-  - sudo dpkg -i cdh4-repository_1.0_all.deb
-  - sudo apt-get update -qq
-  - sudo apt-get install -y zookeeper-server
+  - cd /opt
+  - sudo wget http://apache.is.co.za/zookeeper/zookeeper-3.4.9/zookeeper-3.4.9.tar.gz
+  - sudo tar -xvf zookeeper-3.4.9.tar.gz
 
 before_script:
-  - sudo service zookeeper-server init
-  - sudo service zookeeper-server start
-  - cd cpp
+  - ls
+  - cd zookeeper-3.4.9
+  - sudo bin/zkServer.sh start
+  - cd $TRAVIS_BUILD_DIR/cpp
   - mkdir build
   - cd build
   - cmake ..
@@ -26,7 +23,8 @@ script:
   - ./tests/testFoo
 
 after_script:
-  - sudo service zookeeper-server stop
+  - cd /opt/zookeeper-3.4.9
+  - sudo bin/zkServer.sh stop
 
 notifications:
 on_success: always
