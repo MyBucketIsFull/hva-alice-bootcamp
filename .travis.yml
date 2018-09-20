@@ -2,6 +2,7 @@ language: cpp
 
 compiler:
   - gcc
+  - clang
 
 before_install:
   - cd /opt
@@ -9,8 +10,12 @@ before_install:
   - sudo tar -xvf zookeeper-3.4.12.tar.gz
 
 before_script:
-  - ls
-  - cd zookeeper-3.4.12
+  - cd zookeeper-3.4.12/conf
+  - touch zoo.cfg
+  - echo "tickTime=2000" >> zoo.cfg
+  - echo "dataDir=/var/zookeeper" >> zoo.cfg
+  - echo "clientPort=2181" >> zoo.cfg
+  - cd ..
   - sudo bin/zkServer.sh start
   - cd $TRAVIS_BUILD_DIR/cpp
   - mkdir build
