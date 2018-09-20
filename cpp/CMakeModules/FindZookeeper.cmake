@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
-option(ENABLE_TESTS "Enable unit tests" ON)
+option(ENABLE_ZOOKEEPER "Enable ZooKeeper Library" ON)
 
 if(ENABLE_ZOOKEEPER)
 
