@@ -10,10 +10,14 @@ endif()
 
 set(CMAKE_CXX_STANDARD 11)
 
+option(ENABLE_ZOOKEEPER "Enable ZooKeeper Library" ON)
+
+if(ENABLE_ZOOKEEPER)
 set(
     CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
     "${CMAKE_SOURCE_DIR}/CMakeModules/"
 )
+endif()
 
 find_package(Zookeeper REQUIRED)
 

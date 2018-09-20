@@ -12,6 +12,7 @@ set(
 
 find_package_handle_standard_args(
     Zookeeper
+    REQUIRED_ARGS
     ZOOKEEPER_INCLUDE_DIR
     ZOOKEEPER_LIBRARIES
 )
