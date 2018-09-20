@@ -7,7 +7,7 @@ before_script:
   - cd cpp
   - mkdir build
   - cd build
-  - cmake .. -ENABLE_ZOOKEEPER=OFF
+  - cmake -ENABLE_ZOOKEEPER=OFF ..
   - make testFoo
 
 script:
