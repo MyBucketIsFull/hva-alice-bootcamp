@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
 
-option(ENABLE_TESTS "Enable unit tests" ON)
 option(ENABLE_ZOOKEEPER "Enable ZooKeeper Library" ON)
 
 if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
@@ -21,8 +20,10 @@ set(
 find_package(Zookeeper REQUIRED)
 
 if(ENABLE_TESTS)
+
     enable_testing()
     add_subdirectory(tests)
+    
 endif()
 
 add_subdirectory(lib)
