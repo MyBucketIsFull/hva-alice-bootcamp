@@ -5,6 +5,7 @@ compiler:
   - clang
 
 before_install:
+  - cd /opt
   - sudo wget http://apache.hippo.nl/zookeeper/current/zookeeper-3.4.12.tar.gz
   - sudo tar -xvf zookeeper-3.4.12.tar.gz
 
@@ -17,7 +18,7 @@ before_script:
   - echo "clientPort=2181" >> zoo.cfg
   - cd ..
   - sudo bin/zkServer.sh start
-  - cd ../cpp
+  - cd $TRAVIS_BUILD_DIR/cpp
   - mkdir build
   - cd build
   - cmake ..
@@ -28,7 +29,7 @@ script:
   - ./tests/testFoo
 
 after_script:
-  - cd ../../zookeeper-3.4.12
+  - cd /opt/zookeeper-3.4.12
   - sudo bin/zkServer.sh stop
 
 notifications:
