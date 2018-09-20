@@ -4,7 +4,7 @@ compiler:
   - gcc
   - clang
 
-before-script:
+before_script:
   - cd cpp
   - mkdir build
   - cd build
