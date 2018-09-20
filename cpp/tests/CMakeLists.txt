@@ -1,23 +1,20 @@
-PROJECT(Example_tests)
+PROJECT(tests)
 
-SET(
-    EXAMPLE_TEST_SOURCES
-    ${CMAKE_CURRENT_SOURCE_DIR}/TestLib.cxx
-)
-include_directories(${CMAKE_SOURCE_DIR}/examplelib/include )
+include_directories(${CMAKE_SOURCE_DIR}/lib/include )
 
-FIND_PACKAGE(
-    Boost 1.53 COMPONENTS 
+find_package(
+    Boost 1.53
+    COMPONENTS 
     unit_test_framework 
     REQUIRED
 )
 
-ADD_EXECUTABLE(Tests ${EXAMPLE_TEST_SOURCES})
+add_executable(testFoo ${CMAKE_CURRENT_SOURCE_DIR}/testFoo.cxx)
 
-TARGET_LINK_LIBRARIES(
-    Tests
-    ExampleLib
+target_link_libraries(
+    testFoo
+    lib
     ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
 )
 
-ADD_TEST(ExampleTest Tests)
+add_test(tests testFoo)

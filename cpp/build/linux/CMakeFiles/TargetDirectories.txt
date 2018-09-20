@@ -1,0 +1,3 @@
+/media/sf_Shared/hva-cpp-bootcamp copy/build/linux/lib/CMakeFiles/lib.dir
+/media/sf_Shared/hva-cpp-bootcamp copy/build/linux/bin/CMakeFiles/main.dir
+/media/sf_Shared/hva-cpp-bootcamp copy/build/linux/tests/CMakeFiles/testFoo.dir

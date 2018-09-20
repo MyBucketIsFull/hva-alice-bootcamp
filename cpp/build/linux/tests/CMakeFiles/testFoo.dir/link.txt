@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/testFoo.dir/testFoo.cxx.o  -o testFoo -rdynamic ../lib/liblib.so -lboost_unit_test_framework-mt -Wl,-rpath,"/media/sf_Shared/hva-cpp-bootcamp copy/build/linux/lib" 

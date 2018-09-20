@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../../bin/include/Rest.h
+string
+-
+
+../../bin/include/UserInput.h
+
+/media/sf_Shared/hva-cpp-bootcamp copy/bin/src/Rest.cxx
+curl/curl.h
+-
+iostream
+-
+sstream
+-
+string
+-
+Rest.h
+/media/sf_Shared/hva-cpp-bootcamp copy/bin/src/Rest.h
+UserInput.h
+/media/sf_Shared/hva-cpp-bootcamp copy/bin/src/UserInput.h
+
