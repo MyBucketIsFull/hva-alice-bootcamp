@@ -2,8 +2,10 @@ cmake_minimum_required(VERSION 2.8)
 
 include(FindPackageHandleStandardArgs)
 
-find_library(ZOOKEEPER_LIBRARY /opt/zookeeper-3.4.12/src/c/include/zookeeper_mt)
-find_path(ZOOKEEPER_INCLUDE_DIR "/opt/zookeeper-3.4.12/src/c/include/zookeeper.h")
+include_directories(${CMAKE_SOURCE_DIR}/zookeeper-3.4.12/src/c/include/)
+
+find_library(ZOOKEEPER_LIBRARY zookeeper_mt)
+find_path(ZOOKEEPER_INCLUDE_DIR "zookeeper.h")
 
 set(
     ZOOKEEPER_LIBRARIES
