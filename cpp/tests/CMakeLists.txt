@@ -1,9 +1,9 @@
 PROJECT(tests)
 
-include_directories(${CMAKE_SOURCE_DIR}/lib/include )
+include_directories(${CMAKE_SOURCE_DIR}/lib/include)
 
 find_package(
-    Boost 1.53
+    Boost 1.55
     COMPONENTS 
     unit_test_framework 
     REQUIRED

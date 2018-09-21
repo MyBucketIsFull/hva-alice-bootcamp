@@ -3,6 +3,13 @@ language: cpp
 compiler:
   - gcc
 
+addons:
+  apt:
+    sources:
+      - boost-latest
+    packages:
+      - libboost1.55-all-dev
+
 before_script:
   - cd cpp
   - mkdir build
