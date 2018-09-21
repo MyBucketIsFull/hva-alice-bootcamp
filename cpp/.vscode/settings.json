@@ -44,6 +44,13 @@
         "utility": "cpp",
         "__config": "cpp",
         "__nullptr": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "iterator": "cpp",
+        "string": "cpp",
+        "bitset": "cpp",
+        "string_view": "cpp",
+        "__locale": "cpp",
+        "locale": "cpp",
+        "thread": "cpp"
     }
 }

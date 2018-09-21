@@ -1,11 +1,36 @@
-before_script: cd rest-api
+matrix:
+  include:
+    - before_script: cd rest-api
 
-language: node_js
-node_js:
-  - "7"
+      language: node_js
+      node_js:
+        - "7"
 
-script: ./build.sh
+      script: ./build.sh
+
+
+    - language: cpp
+
+      compiler:
+        - gcc
+
+      addons:
+        apt:
+          sources:
+            - boost-latest
+          packages:
+            - libboost1.55-all-dev
+
+      before_script:
+        - cd cpp
+        - mkdir build
+        - cd build
+        - cmake -DENABLE_ZOOKEEPER=OFF -DENABLE_LATEST_BOOST=ON ..
+        - make testFoo
+
+      script:
+        - ./tests/testFoo
 
 notifications:
-on_success: always
-on_failure: always
+  on_success: always
+  on_failure: always

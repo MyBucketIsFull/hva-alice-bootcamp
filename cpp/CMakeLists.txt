@@ -1,22 +1,33 @@
 cmake_minimum_required(VERSION 2.8)
 
-IF(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
+option(ENABLE_TESTS "Enable unit tests" ON)
+option(ENABLE_ZOOKEEPER "Enable ZooKeeper Library" ON)
+option(ENABLE_LATEST_BOOST "Enable latest Boost version" OFF)
+
+if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
     # Check if you're in the root directory of the project, and give an error.
-    MESSAGE(FATAL_ERROR "Please create a dedicated build directory for this load balancer. (You may need remove the CmakeCache.txt and the cache)")
-ENDIF()
+    message(
+        FATAL_ERROR
+        "Please create a dedicated build directory for this load balancer. (You may need remove the CmakeCache.txt and the cache)"
+    )
+endif()
 
-SET(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 11)
 
-SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/CMakeModules/")
-FIND_PACKAGE(Zookeeper REQUIRED)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH})
 
-OPTION(ENABLE_TESTS "Enable unit tests" ON)
+if(ENABLE_ZOOKEEPER)
+    set(
+        CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
+        "${CMAKE_SOURCE_DIR}/CMakeModules/"
+    )
+    find_package(Zookeeper REQUIRED)
+endif()
 
-IF(ENABLE_TESTS)
-    ENABLE_TESTING()
-
+if(ENABLE_TESTS)
+    enable_testing()
     add_subdirectory(tests)
-ENDIF()
+endif()
 
-add_subdirectory(examplelib)
-add_subdirectory(examplebin)
+add_subdirectory(lib)
+add_subdirectory(bin)
