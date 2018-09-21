@@ -2,7 +2,7 @@ PROJECT(tests)
 
 include_directories(${CMAKE_SOURCE_DIR}/lib/include)
 
-if(ENABLE_ZOOKEEPER)
+if(ENABLE_LATEST_BOOST)
     find_package(
         Boost 1.55
         COMPONENTS 
