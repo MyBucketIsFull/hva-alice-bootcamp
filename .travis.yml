@@ -8,13 +8,13 @@ addons:
     sources:
       - boost-latest
     packages:
-      - libboost1.53-all-dev
+      - libboost1.55-all-dev
 
 before_script:
   - cd cpp
   - mkdir build
   - cd build
-  - cmake -DENABLE_ZOOKEEPER=OFF ..
+  - cmake -DENABLE_ZOOKEEPER=OFF -DENABLE_LATEST_BOOST=ON ..
   - make testFoo
 
 script:

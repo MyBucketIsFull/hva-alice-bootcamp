@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 
 option(ENABLE_TESTS "Enable unit tests" ON)
 option(ENABLE_ZOOKEEPER "Enable ZooKeeper Library" ON)
+option(ENABLE_LATEST_BOOST "Enable latest Boost version" OFF)
 
 if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
     # Check if you're in the root directory of the project, and give an error.
