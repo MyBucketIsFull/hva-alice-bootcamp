@@ -13,22 +13,19 @@ endif()
 
 set(CMAKE_CXX_STANDARD 11)
 
-if(ENABLE_ZOOKEEPER)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH})
 
+if(ENABLE_ZOOKEEPER)
     set(
         CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
         "${CMAKE_SOURCE_DIR}/CMakeModules/"
     )
-
     find_package(Zookeeper REQUIRED)
-
 endif()
 
 if(ENABLE_TESTS)
-
     enable_testing()
     add_subdirectory(tests)
-
 endif()
 
 add_subdirectory(lib)
