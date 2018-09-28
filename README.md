@@ -35,11 +35,11 @@ The 'cmake ..' commands contains some options:
 
 To run the project:
 ```
-./bin/main'
+./bin/main
 ```
 
 To run the Foo unit test:
 ```
-./tests/testFoo'
+./tests/testFoo
 ```
 

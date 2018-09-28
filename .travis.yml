@@ -1,18 +1,19 @@
 matrix:
   include:
-    - before_script: cd rest-api
-
-      language: node_js
+    - language: node_js
       node_js:
         - "7"
+      
+      before_script:
+        - cd rest-api
 
-      script: ./build.sh
+      # Tests code quality with TSLint.
+      script:
+        - ./node_modules/tslint/bin/tslint -c tslint.json 'src/**/*.ts'
 
 
     - language: cpp
-
-      compiler:
-        - gcc
+      compiler: gcc
 
       addons:
         apt:
@@ -28,6 +29,7 @@ matrix:
         - cmake -DENABLE_ZOOKEEPER=OFF -DENABLE_LATEST_BOOST=ON ..
         - make testFoo
 
+      # Runs unit tests
       script:
         - ./tests/testFoo
 
